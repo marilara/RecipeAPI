@@ -12,7 +12,9 @@ namespace RecipeAPI.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            Recipe rec = RecipeDAL.GetRecipe(q:"omelet");
+            ViewBag.recipeTitle = rec.Title;
+                return View();
         }
 
         public IActionResult Privacy()
