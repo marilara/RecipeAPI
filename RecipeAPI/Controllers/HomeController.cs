@@ -12,7 +12,8 @@ namespace RecipeAPI.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            Recipe r = RecipeDAL.GetRecipe();
+                return View();
         }
 
         public IActionResult Privacy()
