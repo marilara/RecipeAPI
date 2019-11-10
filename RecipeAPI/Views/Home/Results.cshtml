@@ -1,0 +1,40 @@
+﻿@model IEnumerable<RecipeAPI.Models.Recipe>
+
+@{
+    ViewData["Title"] = "Results";
+}
+
+<h2>Results</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <p><b>Recipe Name</b></p>
+            </td>
+            <td>
+                <p><b>Ingredients</b></p>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.Thumbnail)" />
+                </td>
+                <td>
+                    <a src="@Html.DisplayFor(modelItem => item.Href)">@Html.DisplayFor(modelItem => item.Title)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ingredients)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
