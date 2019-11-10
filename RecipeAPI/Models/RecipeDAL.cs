@@ -28,12 +28,13 @@ namespace RecipeAPI.Models
         // Method to search and create list of recipes
         public static List<Recipe> GetRecipe(string i, string q)
         {
+            // Return APICall with search parameters as a string
             string APIText = CallRecipeAPI(i, q);
 
             List<Recipe> recipes = new List<Recipe>();
 
+            // Create JToken to access API and a list to searchthe results
             JToken t = JToken.Parse(APIText);
-
             List<JToken> results = t["results"].ToList();
 
             foreach (JToken recipe in results)
