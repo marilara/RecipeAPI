@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using RecipeAPI.Models;
 
 namespace RecipeAPI.Controllers
@@ -12,8 +13,21 @@ namespace RecipeAPI.Controllers
     {
         public IActionResult Index()
         {
-            Recipe r = RecipeDAL.GetRecipe();
                 return View();
+        }
+
+        public IActionResult Results(string i, string q)
+        {
+            List<Recipe> recipes = RecipeDAL.GetRecipe(i, q);
+
+            if (recipes != null)
+            {
+                return View(recipes);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         public IActionResult Privacy()
