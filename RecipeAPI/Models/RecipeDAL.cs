@@ -10,43 +10,39 @@ namespace RecipeAPI.Models
 {
     public class RecipeDAL
     {
+        // Create method to call RecipePuppyAPI
         private static string baseUrl = "http://www.recipepuppy.com/api";
 
-        public static string GetRecipe()
+        public static string CallRecipeAPI(string i, string q)
         {
-            HttpWebRequest request = WebRequest.CreateHttp($"{baseUrl}/");
+            HttpWebRequest request = WebRequest.CreateHttp($"{baseUrl}/?i={i}&q={q}");
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
             // Convert response to a string
             StreamReader rd = new StreamReader(response.GetResponseStream());
             string APIText = rd.ReadToEnd();
 
-            //JToken t = ParseJsonString(APIText);
-
-            //Recipe r = new Recipe(t);
-
             return APIText;
         }
 
-        public static JToken ParseJsonString(string text)
+        // Method to search and create list of recipes
+        public static List<Recipe> GetRecipe(string i, string q)
         {
-            JToken output = JToken.Parse(text);
-            return output;
-        }
+            string APIText = CallRecipeAPI(i, q);
 
-        public List<Recipe> GetRecipe(JToken t)
-        {
-            List<Recipe> tr = new List<Recipe>();
+            List<Recipe> recipes = new List<Recipe>();
 
-            foreach (JToken item in t["results"])
+            JToken t = JToken.Parse(APIText);
+
+            List<JToken> results = t["results"].ToList();
+
+            foreach (JToken recipe in results)
             {
-                tr.Add(new Recipe()
-                {
-                    Title = item["title"].ToString()
-                });
+                Recipe r = new Recipe(recipe);
+                recipes.Add(r);
             }
             
-            return tr;
+            return recipes;
         }
     }
 }
