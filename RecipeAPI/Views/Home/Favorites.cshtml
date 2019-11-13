@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<RecipeAPI.Models.Recipe>
 
 @{
-    ViewData["Title"] = "Results";
+    ViewData["Title"] = "Favorites";
 }
 
-<h2>Results</h2>
+<h2>Favorite Recipes</h2>
 
 <table class="table">
     <thead>
@@ -32,12 +32,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Ingredients)
             </td>
-            <td>
-                <a asp-action="AddFavorites" asp-route-title="@item.Title" asp-route-href="@item.Href" asp-route-ingredients="@item.Ingredients" asp-route-thumbnail="@item.Thumbnail">Add to Favorites</a>
-            </td>
-        </tr>
+                <td>
+                    <a asp-action="DeleteFavorites" asp-route-id="@item.Id">Delete from Favorites</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
-
-
