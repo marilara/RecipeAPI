@@ -12,7 +12,7 @@ namespace RecipeAPI.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-MARI\SQLEXPRESS;Initial Catalog=Favorites;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Data Source=LAPTOP-F30FORNB\SQLEXPRESS;Initial Catalog=Favorites;Trusted_Connection=True;");
         }
     }
 }
